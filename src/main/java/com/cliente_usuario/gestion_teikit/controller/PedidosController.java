@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "https://teikit-frontend.up.railway.app")
 @RestController
 @RequestMapping("/api/pedido")
 public class PedidosController {
