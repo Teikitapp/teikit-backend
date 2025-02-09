@@ -21,7 +21,7 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-@CrossOrigin(origins = "https://teikit-frontend.up.railway.app")
+@CrossOrigin(origins = "https://teikit.cl")
 @RestController
 @RequestMapping("/api/casillero")
 public class CasilleroController {

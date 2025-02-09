@@ -12,7 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@CrossOrigin(origins = "https://teikit-frontend.up.railway.app")
+@CrossOrigin(origins = "https://teikit.cl")
 @RestController
 @RequestMapping("/api/producto")
 public class ProductosController {

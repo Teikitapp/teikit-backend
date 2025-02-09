@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@CrossOrigin(origins = "https://teikit-frontend.up.railway.app")
+@CrossOrigin(origins = "https://teikit.cl")
 @RestController
 @RequestMapping("/api/usuario")
 public class UsuarioController {
