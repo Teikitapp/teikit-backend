@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins = "${cors.allowed.origins}")
+@CrossOrigin(origins = "${frontend.api.url}")
 @RestController
 @RequestMapping("/api/detallePedido")
 public class DetallePedidoController {

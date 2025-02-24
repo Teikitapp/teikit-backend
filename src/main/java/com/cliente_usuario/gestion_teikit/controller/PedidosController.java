@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-@CrossOrigin(origins = "${cors.allowed.origins}")
+@CrossOrigin(origins = "${frontend.api.url}")
 @RestController
 @RequestMapping("/api/pedido")
 public class PedidosController {

@@ -12,7 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@CrossOrigin(origins = "${cors.allowed.origins}")
+@CrossOrigin(origins = "${frontend.api.url}")
 @RestController
 @RequestMapping("/api/producto")
 public class ProductosController {
