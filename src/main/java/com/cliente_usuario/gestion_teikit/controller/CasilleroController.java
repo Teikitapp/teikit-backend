@@ -21,7 +21,7 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-@CrossOrigin(origins = "${frontend.api.url}", "${locker.api.url}")
+@CrossOrigin(origins = "${cors.allowed.origins}")
 @RestController
 @RequestMapping("/api/casillero")
 public class CasilleroController {
