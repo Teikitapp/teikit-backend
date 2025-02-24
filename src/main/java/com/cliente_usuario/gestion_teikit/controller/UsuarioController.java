@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@CrossOrigin(origins = "https://www.teikit.cl")
+@CrossOrigin(origins = "${cors.allowed.origins}")
 @RestController
 @RequestMapping("/api/usuario")
 public class UsuarioController {

@@ -14,7 +14,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@CrossOrigin(origins = "https://www.teikit.cl")
+@CrossOrigin(origins = "${cors.allowed.origins}")
 @RestController
 @RequestMapping("/api/data")
 public class ClienteController {
