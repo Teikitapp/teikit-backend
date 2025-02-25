@@ -2,24 +2,15 @@ package com.cliente_usuario.gestion_teikit.controller;
 
 import com.cliente_usuario.gestion_teikit.exception.ResourceNotFoundException;
 import com.cliente_usuario.gestion_teikit.model.Casillero;
-import com.cliente_usuario.gestion_teikit.model.Cliente;
-import com.cliente_usuario.gestion_teikit.model.Pedido;
 import com.cliente_usuario.gestion_teikit.repository.CasilleroRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import javax.print.DocFlavor;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.MalformedURLException;
+import java.io.*;
+import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 @CrossOrigin(origins = "${cors.allowed.origins}")
 @RestController
@@ -62,25 +53,44 @@ public class CasilleroController {
        Casillero c = casilleroRepository.save(casillero);
 
 
-       if (nuevoEstado==4) {
+      if (nuevoEstado == 4) {
+            try {
+                URL object = new URL("https://nicely-valued-chimp.ngrok-free.app/locker/opening");
 
-           String url = "http://localhost:8080/MiProyecto/actualizar?casillero="+nuevoEstado;
+                HttpURLConnection con = (HttpURLConnection) object.openConnection();
+                con.setDoOutput(true);
+                con.setDoInput(true);
+                con.setRequestMethod("POST");
+                con.setRequestProperty("Content-Type", "application/json");
+                con.setRequestProperty("Accept", "application/json");
+                con.setRequestProperty("Authorization", "Bearer 3nD9$KvzL9pYm2tQw#J6o@MxpG4R8");
 
-           try {
-               URLConnection conn = new URL(url).openConnection();
-               try (InputStream stream = conn.getInputStream();
-                    Scanner sc = new Scanner(stream, "UTF-8")) {
-                   sc.useDelimiter("\\A");
-                   if (sc.hasNext()) {
-                       System.out.printf("Respuesta: %s", sc.next());
-                   }
+                // Datos que deseas enviar en formato JSON
+                 String data = "{\"casillero\":"+idCasillero+"}";
+
+                // Obtenemos el OutputStream para agregar el json de la petición.
+               try(OutputStream os = con.getOutputStream()) {
+                    byte[] input = data.toString().getBytes("utf-8");
+                    os.write(input, 0, input.length);
+                }catch (Exception e) {
+                   e.printStackTrace();
                }
-           } catch (MalformedURLException e) {
-               Logger.getAnonymousLogger().log(Level.SEVERE, "URL error", e);
-           } catch (IOException e) {
-               Logger.getAnonymousLogger().log(Level.SEVERE, "IO error", e);
-           }
-       }
+
+                // Obtener la respuesta
+                try(BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream(), "utf-8"))) {
+                    StringBuilder respuesta = new StringBuilder();
+                    String acumuladorRespuesta = null;
+                    while ((acumuladorRespuesta = br.readLine()) != null) {
+                        respuesta.append(acumuladorRespuesta.trim());
+                    }
+                    System.out.println(respuesta.toString());
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
 
        return ResponseEntity.ok(c);
     }
