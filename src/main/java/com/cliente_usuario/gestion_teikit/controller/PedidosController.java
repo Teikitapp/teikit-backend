@@ -104,7 +104,7 @@ public class PedidosController {
     public List<PedidosDto> listarPedidosYdetalle(@PathVariable int idCliente){
 
         Date todayDate = new Date();
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         String fechaActual = sdf.format(todayDate);
         String fechaTemp = "13/1/2025";
 
