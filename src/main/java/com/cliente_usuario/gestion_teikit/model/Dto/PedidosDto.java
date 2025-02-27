@@ -13,6 +13,8 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@Get
+@Set    
 public class PedidosDto {
     private long id;
     private String fechaIngresadoPedido;
