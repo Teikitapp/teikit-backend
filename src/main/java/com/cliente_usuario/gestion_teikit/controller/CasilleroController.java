@@ -83,6 +83,7 @@ public class CasilleroController {
                         respuesta.append(acumuladorRespuesta.trim());
                     }
                     System.out.println(respuesta.toString());
+                    System.out.println("Casillero "+idCasillero+" abierto");
                 }
 
             } catch (Exception e) {
