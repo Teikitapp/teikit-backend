@@ -12,9 +12,7 @@ import java.util.List;
 //@FieldDefaults(level = AccessLevel.PRIVATE)
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
-@Get
-@Set    
+@Data  
 public class PedidosDto {
     private long id;
     private String fechaIngresadoPedido;
