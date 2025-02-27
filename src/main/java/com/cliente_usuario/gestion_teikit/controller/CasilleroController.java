@@ -54,34 +54,31 @@ public class CasilleroController {
 
         if (nuevoEstado == 4) {
             try {
-                // Obtiene la URL y el Token desde variables de entorno
-                String lockerApiUrl = System.getenv("LOCKER_API_URL") + "/locker/opening";
-                String lockerApiToken = System.getenv("LOCKER_API_TOKEN");
+                URL object = new URL("https://nicely-valued-chimp.ngrok-free.app/locker/opening");
 
-                URL object = new URL(lockerApiUrl);
                 HttpURLConnection con = (HttpURLConnection) object.openConnection();
                 con.setDoOutput(true);
                 con.setDoInput(true);
                 con.setRequestMethod("POST");
                 con.setRequestProperty("Content-Type", "application/json");
                 con.setRequestProperty("Accept", "application/json");
-                con.setRequestProperty("Authorization", "Bearer " + lockerApiToken);
+                con.setRequestProperty("Authorization", "Bearer 3nD9$KvzL9pYm2tQw#J6o@MxpG4R8");
 
                 // Datos que deseas enviar en formato JSON
-                String data = "{\"casillero\":" + idCasillero + "}";
+                 String data = "{\"casillero\":"+idCasillero+"}";
 
                 // Obtenemos el OutputStream para agregar el json de la petición.
-                try (OutputStream os = con.getOutputStream()) {
-                    byte[] input = data.getBytes("utf-8");
+               try(OutputStream os = con.getOutputStream()) {
+                    byte[] input = data.toString().getBytes("utf-8");
                     os.write(input, 0, input.length);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                }catch (Exception e) {
+                   e.printStackTrace();
+               }
 
                 // Obtener la respuesta
-                try (BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream(), "utf-8"))) {
+                try(BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream(), "utf-8"))) {
                     StringBuilder respuesta = new StringBuilder();
-                    String acumuladorRespuesta;
+                    String acumuladorRespuesta = null;
                     while ((acumuladorRespuesta = br.readLine()) != null) {
                         respuesta.append(acumuladorRespuesta.trim());
                     }
