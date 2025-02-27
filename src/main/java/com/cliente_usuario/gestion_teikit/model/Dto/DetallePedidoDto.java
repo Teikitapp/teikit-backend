@@ -9,12 +9,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class DetallePedidoDto {
-    private long id;
-    private int cantidad;
-    private long unitPrice;
-    private String nombreProducto;
-    private long idUsuario;
-    private long idCliente;
-    private int estadoDetallePedido;
-    private long idPedido;
+     long id;
+     int cantidad;
+     long unitPrice;
+     String nombreProducto;
+     long idUsuario;
+     long idCliente;
+     int estadoDetallePedido;
+     long idPedido;
 }
