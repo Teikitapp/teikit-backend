@@ -1,6 +1,5 @@
 package com.cliente_usuario.gestion_teikit.model.Dto;
 
-import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,15 +7,13 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Getter
-@Setter
 public class DetallePedidoDto {
-     long id;
-     int cantidad;
-     long unitPrice;
-     String nombreProducto;
-     long idUsuario;
-     long idCliente;
-     int estadoDetallePedido;
-     long idPedido;
+    private long id;
+    private int cantidad;
+    private long unitPrice;
+    private String nombreProducto;
+    private long idUsuario;
+    private long idCliente;
+    private int estadoDetallePedido;
+    private long idPedido;
 }
