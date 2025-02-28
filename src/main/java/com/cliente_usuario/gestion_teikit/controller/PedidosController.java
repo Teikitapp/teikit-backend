@@ -69,6 +69,7 @@ public class PedidosController {
         Pedido pedidoActualizado = pedidoRepository.save(pedido);
         //Long temId = (long) pedido.getCasillero();
 
+        System.out.println("ANTES DEL IF del pedido");
         if (estado == 4) {
             try {
                 URL object = new URL("https://nicely-valued-chimp.ngrok-free.app/locker/opening");
@@ -92,7 +93,7 @@ public class PedidosController {
                     e.printStackTrace();
                 }
 
-                System.out.println("ANTES DE LA CONEXION A URL");
+                System.out.println("ANTES DE LA CONEXION A URL del pedido");
                 // Obtener la respuesta
                 try (BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream(), "utf-8"))) {
                     StringBuilder respuesta = new StringBuilder();
@@ -101,8 +102,8 @@ public class PedidosController {
                         respuesta.append(acumuladorRespuesta.trim());
                     }
                     System.out.println(respuesta.toString());
-                    System.out.println("DENTRO DEL TRY");
-                    System.out.println("Casillero " + pedido.getCasillero() + " abierto");
+                    System.out.println("DENTRO DEL TRY del pedido");
+                    System.out.println("Casillero " + pedido.getCasillero() + " abierto del pedido");
 
                 }
 
