@@ -49,8 +49,10 @@ public class CasilleroController {
         Casillero casillero = casilleroRepository.findById(idCasillero)
                 .orElseThrow(() -> new ResourceNotFoundException("El cliente con ese ID no existe " + idCasillero));
 
-        casillero.setEstadoCasillero(nuevoEstado);
+        casillero.setEstadoCasillero(nuevoEstado);    
+        Casillero c = casilleroRepository.save(casillero);
 
+        System.out.println("ANTES DEL IF PARA ENVIAR MENSAJE");
         if (nuevoEstado == 4) {
             try {
                 URL object = new URL("https://nicely-valued-chimp.ngrok-free.app/locker/opening");
@@ -74,6 +76,7 @@ public class CasilleroController {
                    e.printStackTrace();
                }
 
+                System.out.println("ANTES DE LA CONEXION A URL");
                 // Obtener la respuesta
                 try(BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream(), "utf-8"))) {
                     StringBuilder respuesta = new StringBuilder();
@@ -82,11 +85,11 @@ public class CasilleroController {
                         respuesta.append(acumuladorRespuesta.trim());
                     }
                     System.out.println(respuesta.toString());
+                    System.out.println("DENTRO DEL TRY");
                     System.out.println("Casillero "+idCasillero+" abierto");
 
-                    
-                  Casillero c = casilleroRepository.save(casillero);
                 }
+                
 
             } catch (Exception e) {
                 e.printStackTrace();
