@@ -53,7 +53,8 @@ public class CasilleroController {
         Casillero c = casilleroRepository.save(casillero);
 
         System.out.println("ANTES DEL IF PARA ENVIAR MENSAJE");
-        System.out.println("ID ESTADO CASILLERO:" + idCasillero );
+        System.out.println("ID id CASILLERO:" + idCasillero );
+        System.out.println("ID ESTADO CASILLERO:" + nuevoEstado );
         if (nuevoEstado == 4) {
             try {
                 URL object = new URL("https://nicely-valued-chimp.ngrok-free.app/locker/opening");
