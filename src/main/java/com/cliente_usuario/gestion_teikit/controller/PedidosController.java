@@ -66,8 +66,8 @@ public class PedidosController {
         Pedido pedidoActualizado = pedidoRepository.save(pedido);
         //Long temId = (long) pedido.getCasillero();
 
-        System.out.println("pedidos --> ID CASILLERO:" + idCasillero );
-        System.out.println("pedidos --> ID ESTADO CASILLERO:" + nuevoEstado );
+        
+        System.out.println("pedidos --> ID ESTADO CASILLERO:" + estado );
         if (estado == 4) {
             try {
                 URL object = new URL("https://nicely-valued-chimp.ngrok-free.app/locker/opening");
