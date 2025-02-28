@@ -49,7 +49,8 @@ public class CasilleroController {
         Casillero casillero = casilleroRepository.findById(idCasillero)
                 .orElseThrow(() -> new ResourceNotFoundException("El cliente con ese ID no existe " + idCasillero));
 
-        Casillero c ;
+        
+        Casillero c = new Casillero();
 
         System.out.println("ANTES DEL IF PARA ENVIAR MENSAJE");
         System.out.println("ID id CASILLERO:" + idCasillero );
