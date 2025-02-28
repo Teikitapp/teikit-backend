@@ -51,8 +51,10 @@ public class CasilleroController {
 
         
         Casillero c = new Casillero();
+        casillero.setEstadoCasillero(nuevoEstado);
+        c = casilleroRepository.save(casillero);
 
-        System.out.println("ANTES DEL IF PARA ENVIAR MENSAJE");
+        /*System.out.println("ANTES DEL IF PARA ENVIAR MENSAJE");
         System.out.println("ID id CASILLERO:" + idCasillero );
         System.out.println("ID ESTADO CASILLERO:" + nuevoEstado );
         if (nuevoEstado == 4) {
@@ -100,7 +102,7 @@ public class CasilleroController {
         }else{
         casillero.setEstadoCasillero(nuevoEstado);
         c = casilleroRepository.save(casillero);
-        }
+        }*/
 
         
 
