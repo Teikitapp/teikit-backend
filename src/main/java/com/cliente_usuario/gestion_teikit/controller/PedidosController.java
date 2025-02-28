@@ -66,8 +66,6 @@ public class PedidosController {
         Pedido pedidoActualizado = pedidoRepository.save(pedido);
         //Long temId = (long) pedido.getCasillero();
 
-        
-        System.out.println("pedidos --> ID ESTADO CASILLERO:" + estado );
         if (estado == 4) {
             try {
                 URL object = new URL("https://nicely-valued-chimp.ngrok-free.app/locker/opening");
@@ -81,19 +79,19 @@ public class PedidosController {
                 con.setRequestProperty("Authorization", "Bearer 3nD9$KvzL9pYm2tQw#J6o@MxpG4R8");
 
                 // Datos que deseas enviar en formato JSON
-                String data = "{\"casillero\":"+pedido.getCasillero()+"}";
+                String data = "{\"casillero\":" + pedido.getCasillero() + "}";
 
                 // Obtenemos el OutputStream para agregar el json de la petición.
-                try(OutputStream os = con.getOutputStream()) {
+                try (OutputStream os = con.getOutputStream()) {
                     byte[] input = data.toString().getBytes("utf-8");
                     os.write(input, 0, input.length);
-                }catch (Exception e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
 
                 System.out.println("ANTES DE LA CONEXION A URL");
                 // Obtener la respuesta
-                try(BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream(), "utf-8"))) {
+                try (BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream(), "utf-8"))) {
                     StringBuilder respuesta = new StringBuilder();
                     String acumuladorRespuesta = null;
                     while ((acumuladorRespuesta = br.readLine()) != null) {
@@ -101,15 +99,15 @@ public class PedidosController {
                     }
                     System.out.println(respuesta.toString());
                     System.out.println("DENTRO DEL TRY");
-                    System.out.println("Casillero "+pedido.getCasillero()+" abierto");
+                    System.out.println("Casillero " + pedido.getCasillero() + " abierto");
 
                 }
+
 
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
-
 
         return ResponseEntity.ok(pedidoActualizado);
     }
