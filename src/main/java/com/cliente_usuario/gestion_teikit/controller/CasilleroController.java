@@ -49,8 +49,7 @@ public class CasilleroController {
         Casillero casillero = casilleroRepository.findById(idCasillero)
                 .orElseThrow(() -> new ResourceNotFoundException("El cliente con ese ID no existe " + idCasillero));
 
-        casillero.setEstadoCasillero(nuevoEstado);
-        Casillero c = casilleroRepository.save(casillero);
+        
 
         if (nuevoEstado == 4) {
             try {
@@ -84,6 +83,9 @@ public class CasilleroController {
                     }
                     System.out.println(respuesta.toString());
                     System.out.println("Casillero "+idCasillero+" abierto");
+
+                    casillero.setEstadoCasillero(nuevoEstado);
+                    Casillero c = casilleroRepository.save(casillero);
                 }
 
             } catch (Exception e) {
