@@ -81,7 +81,7 @@ public class PedidosController {
                 con.setRequestProperty("Authorization", "Bearer 3nD9$KvzL9pYm2tQw#J6o@MxpG4R8");
 
                 // Datos que deseas enviar en formato JSON
-                String data = "{\"casillero\":"+idCasillero+"}";
+                String data = "{\"casillero\":"+pedido.getCasillero()+"}";
 
                 // Obtenemos el OutputStream para agregar el json de la petición.
                 try(OutputStream os = con.getOutputStream()) {
@@ -101,13 +101,14 @@ public class PedidosController {
                     }
                     System.out.println(respuesta.toString());
                     System.out.println("DENTRO DEL TRY");
-                    System.out.println("Casillero "+idCasillero+" abierto");
+                    System.out.println("Casillero "+pedido.getCasillero()+" abierto");
 
                 }
 
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        }
 
 
         return ResponseEntity.ok(pedidoActualizado);
