@@ -49,8 +49,7 @@ public class CasilleroController {
         Casillero casillero = casilleroRepository.findById(idCasillero)
                 .orElseThrow(() -> new ResourceNotFoundException("El cliente con ese ID no existe " + idCasillero));
 
-        casillero.setEstadoCasillero(nuevoEstado);    
-        Casillero c = casilleroRepository.save(casillero);
+        Casillero c ;
 
         System.out.println("ANTES DEL IF PARA ENVIAR MENSAJE");
         System.out.println("ID id CASILLERO:" + idCasillero );
@@ -91,11 +90,15 @@ public class CasilleroController {
                     System.out.println("Casillero "+idCasillero+" abierto");
 
                 }
-                
+                casillero.setEstadoCasillero(4);
+                c = casilleroRepository.save(casillero);
 
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        }else{
+        casillero.setEstadoCasillero(nuevoEstado);
+        c = casilleroRepository.save(casillero);
         }
 
         
