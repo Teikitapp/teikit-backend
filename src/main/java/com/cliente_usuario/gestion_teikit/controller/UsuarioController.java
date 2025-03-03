@@ -24,8 +24,21 @@ public class UsuarioController {
     }
 
     @PostMapping("/guardarUsuarios")
-    public Usuario guardarUsuarios(@RequestBody Usuario usuario) {
-        return usuarioRepository.save(usuario);
+    public String guardarUsuarios(@RequestBody Usuario usuario) {
+        List<Usuario> u = usuarioRepository.findByUser(usuario.getEmail());
+        String resp = null;
+        try {
+            if(u.size() > 0){
+                resp = "Usuario ya existe";
+            }else {
+             Usuario l =   usuarioRepository.save(usuario);
+                resp = "Usuario ingresado con éxito";
+            }
+        }catch (Exception e){
+            System.out.println(e);
+            resp = e.getMessage();
+        }
+        return resp;
     }
 
     @PostMapping("/buscarUsuarioUserPass")
