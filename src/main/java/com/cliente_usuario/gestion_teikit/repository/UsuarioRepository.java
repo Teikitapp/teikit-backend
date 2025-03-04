@@ -17,4 +17,10 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
             nativeQuery = true
     )
     List<Usuario> findByPassUser(String user, String pass);
+
+     @Query(
+            value="Select * from usuarios where email = :user",
+            nativeQuery = true
+    )
+    List<Usuario> findByUser(String user);
 }
