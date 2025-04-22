@@ -5,6 +5,7 @@ import com.cliente_usuario.gestion_teikit.model.*;
 import com.cliente_usuario.gestion_teikit.model.Dto.DetallePedidoDto;
 import com.cliente_usuario.gestion_teikit.model.Dto.PedidosDto;
 import com.cliente_usuario.gestion_teikit.repository.*;
+import com.cliente_usuario.gestion_teikit.model.Dto.CompararHorarioDto;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -205,12 +206,66 @@ public class PedidosController {
                 }
             }
             System.out.println(listDto);
-
-            return listDto;
+            //return listDto;
+            return listarPorHoraRetiro(listDto);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
 
+    }
+
+     public List<PedidosDto> listarPorHoraRetiro(List<PedidosDto>  listaEntrada) {
+        CompararHorarioDto dto = new CompararHorarioDto();
+        List<CompararHorarioDto> l = new ArrayList<>();
+        List<PedidosDto> nuevaListaPedidos = new ArrayList<>();
+        //convertir de int a string y unir hr + min para comparar
+        for (int k = 0; k < listaEntrada.size(); k++) {
+            dto = new CompararHorarioDto();
+               String hora = listaEntrada.get(k).getHoraRetiraPedido();
+               String[] parts = hora.split(":");
+               String uno = parts[0];
+               String dos = parts[1];
+               dto.setHora(uno+""+dos);
+               dto.setHoraInteger(Integer.parseInt(dto.getHora()));
+               l.add(dto);
+        }
+
+        //ordena objeto solo por hora
+        for (int x = 0; x < l.size(); x++) {
+            for (int i = 0; i < l.size()-x-1; i++) {
+                if(l.get(i).getHoraInteger() > l.get(i+1).getHoraInteger()){
+                    int tmp = l.get(i+1).getHoraInteger();
+                    l.get(i+1).setHoraInteger(l.get(i).getHoraInteger());
+                    l.get(i+1).setHora(Integer.toString(l.get(i).getHoraInteger()));
+                    l.get(i).setHoraInteger(tmp);
+                    l.get(i).setHora(Integer.toString(tmp));
+
+                }
+            }
+        }
+
+        // compara hora para ordenar pedidos
+        for (int i = 0; i < l.size(); i++) {
+            if (l.get(i).getHora().length() == 3){
+                l.get(i).setHora("0"+l.get(i).getHora());
+            }
+            String a = l.get(i).getHora().substring(0,2);
+            String b = l.get(i).getHora().substring(2,4);
+            l.get(i).setHora(a+":"+b);
+
+            for (int j = 0; j < listaEntrada.size() ; j++) {
+
+                if (listaEntrada.get(j).getHoraRetiraPedido().equals(l.get(i).getHora())) {
+                    nuevaListaPedidos.add(listaEntrada.get(j));
+                }
+
+            }
+        }
+
+
+        System.out.println(l);
+        System.out.println(nuevaListaPedidos);
+        return nuevaListaPedidos;
     }
 
 }
